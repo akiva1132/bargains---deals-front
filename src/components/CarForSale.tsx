@@ -3,11 +3,10 @@ import { Car } from '../types'
 import { useFetch } from '../useFetch'
 import './CarForSale.css'
 import { MediaCard } from './MediaCard'
-const a = ["ds"]
 export const CarForSale = () => {
 
 
-    const { cars, setCars } = useFetch()
+    const { cars } = useFetch()
     return (
         <div id="CarForSale">
             <div id='title'>
