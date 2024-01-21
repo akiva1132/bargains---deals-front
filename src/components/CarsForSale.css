@@ -16,3 +16,16 @@
     justify-content: space-evenly;
     align-items: center;
 }
+.buttons{
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.FcLike{
+    cursor: pointer;
+}
+
+.IoMdShare{
+    cursor: pointer;
+}

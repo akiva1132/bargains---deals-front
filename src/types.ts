@@ -4,6 +4,6 @@ export interface Car{
         name: string
         model: number
         km: number
-        imageUrl: string
+        imageUrls: string[]
         note: string
       }

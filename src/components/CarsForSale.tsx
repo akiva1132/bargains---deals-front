@@ -1,12 +1,12 @@
 
 import { Car } from '../types'
-import { useFetch } from '../useFetch'
-import './CarForSale.css'
+import { useFetchAllCars } from '../customHooks/useFetchAllCars'
+import './CarsForSale.css'
 import { MediaCard } from './MediaCard'
 export const CarForSale = () => {
 
 
-    const { cars } = useFetch()
+    const { cars } = useFetchAllCars()
     return (
         <div id="CarForSale">
             <div id='title'>

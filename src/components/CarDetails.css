@@ -1,0 +1,25 @@
+#Car{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+#CarDetails{
+    display: flex;
+    width: 90%;
+}
+
+#images{
+    padding: 2px;
+    display: flex;
+    justify-content: space-around;
+    background-color: azure;
+    width: auto;
+    height: 80%;
+    border: 1px black solid;
+}
+#details{
+    background-color: azure;
+    width: 50%;
+    height: 80%;
+}
