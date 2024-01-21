@@ -8,23 +8,23 @@ import { Car } from '../types';
 
 export const MediaCard = ({detsils}:{detsils:Car}) => {
   return (
-    <Card sx={{ maxWidth: 345, margin:"10px" }}>
+    <Card sx={{ maxWidth: 345, margin:"10px"}}>
       <CardMedia
-        sx={{ height: 100 }}
+        sx={{ height: "120px" }}
         image={detsils.imageUrl}
         title="green iguana"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography  variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {detsils.manufacturer + " " + detsils.name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography  variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {"model: " + detsils.model}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography  variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {"km: " + detsils.km}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography  variant="body2" color="text.secondary" sx={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
           {detsils.note}
         </Typography>
       </CardContent>

@@ -11,7 +11,7 @@
 }
 #cards{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 10px;
     justify-content: space-evenly;
     align-items: center;
