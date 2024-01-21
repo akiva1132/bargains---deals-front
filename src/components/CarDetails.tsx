@@ -14,7 +14,7 @@ export const CarDetails = () => {
                     <p>{car?.note}</p>
                 </div>
                 <div id="images">
-                    <img style={{ maxWidth: "100%",  maxHeight: "100%" }} src={car?.imageUrl} alt="" />
+                    <img style={{ maxWidth: "100%",  maxHeight: "100%" }} src={car?.imageUrls[0]} alt="" />
                 </div>
             </div>
         </div>
