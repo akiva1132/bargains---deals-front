@@ -116,7 +116,9 @@ export const Header = () => {
                                 textDecoration: 'none',
                             }}
                         >
+                            <div style={{width:"70%", fontSize:"22px"}} id='titleHader'>
                             {"טו קאר השכרת רכב"}
+                            </div>
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
