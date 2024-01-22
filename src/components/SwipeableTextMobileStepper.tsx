@@ -6,10 +6,10 @@ import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+// import SwipeableViews from 'react-swipeable-views';
+// import { autoPlay } from 'react-swipeable-views-utils';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
 
@@ -46,12 +46,12 @@ export const SwipeableTextMobileStepper = ({images}:{images:string[]}) => {
         }}
       >
       </Paper>
-      <AutoPlaySwipeableViews
+      {/* <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-      >
+      > */}
         {images.map((_step, index) => (
           <div key={images[index]}>
             {Math.abs(activeStep - index) <= 2 ? (
@@ -69,7 +69,7 @@ export const SwipeableTextMobileStepper = ({images}:{images:string[]}) => {
             ) : null}
           </div>
         ))}
-      </AutoPlaySwipeableViews>
+      {/* </AutoPlaySwipeableViews> */}
       <MobileStepper
         steps={maxSteps}
         position="static"

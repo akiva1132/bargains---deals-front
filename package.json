@@ -20,8 +20,6 @@
     "react": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.21.3",
-    "react-swipeable-views": "^0.14.0",
-    "react-swipeable-views-utils": "^0.14.0",
     "vite": "^5.0.12"
   },
   "devDependencies": {
