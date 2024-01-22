@@ -17,6 +17,11 @@
         width: 100%;
         /* height: 80%; */
     }
+    #sendMessage{
+        display: flex;
+        width: 135%;
+        justify-content: flex-end
+    }
   }
 
 
@@ -39,6 +44,11 @@
         width: 50%;
         /* height: 80%; */
     }
+    #sendMessage{
+        display: flex;
+        width: 120%;
+        justify-content: flex-end
+    }
   }
   
 
@@ -54,3 +64,4 @@
 .iconLine{
     margin: 8px;
 }
+

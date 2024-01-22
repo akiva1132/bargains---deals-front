@@ -22,6 +22,11 @@ export const CarDetails = () => {
             </div>
         )
     }
+
+    const phoneNumber = '+972532467781'
+    const messageText = `היי, אני פונה בקשר למודעה לגבי ה${car.manufacturer} ${car.model}`
+    const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${messageText}`;
+
     return (
         <div id="Car">
             <div id="CarDetails">
@@ -48,7 +53,11 @@ export const CarDetails = () => {
                     </div>
                     <h3>{"על הרכב: "}</h3>
                     <p>{car.note}</p>
-                    <Button>{"שלח לנו וואצפ"}</Button >
+                    <div id="sendMessage">
+                    <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    <Button variant="contained">שלח לנו הודעה</Button>
+                    </a>
+                    </div>
                 </div>
                 <div id="images">
                     <SwipeableTextMobileStepper images={car.imageUrls} />

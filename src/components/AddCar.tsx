@@ -38,25 +38,21 @@ export const AddCar = () => {
     }) => {
         const data = new FormData(event.currentTarget || undefined);
         event.preventDefault();
+        setError("")
         setWaiting(true)
         const urls = await handleUpload()
+        console.log(urls);
+        
         handleValidation();
         if (isValid) {
-            setError("")
-            console.log(urls);
-            console.log(data);
-            const manufacturer = data.get("manufacturer")?.toString();
-            const name = data.get("name")?.toString();
-            const model = Number(data.get("model"));
-            const km = Number(data.get("km"));
-            const hand = Number(data.get("hand"));
-            const test = data.get("test")?.toString();
-            const note = data.get("note")?.toString();
-            console.log(manufacturer, name, model, km, urls[0]);
-            if (manufacturer && name && model && km && hand && test && urls[0]) {
-                fetchData(manufacturer, name, model, km, hand, test, note || "", urls)
-            }
-            //   navigate("/")
+            const manufacturer = data.get("manufacturer")?.toString() || "";
+            const name = data.get("name")?.toString() || "";
+            const model = Number(data.get("model")) || 0;
+            const km = Number(data.get("km")) || 0;
+            const hand = Number(data.get("hand")) || 0;
+            const test = data.get("test")?.toString() || "";
+            const note = data.get("note")?.toString() || "";
+            fetchData(manufacturer, name, model, km, hand, test, note, urls)
         }
         else {
             setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")
