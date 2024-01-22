@@ -7,9 +7,8 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
+import { useNavigate  } from "react-router-dom";
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { Outlet } from 'react-router-dom';
 
@@ -21,6 +20,7 @@ const pages: string[] = [];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export const Header = () => {
+    const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -28,9 +28,9 @@ export const Header = () => {
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -46,11 +46,12 @@ export const Header = () => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Typography
+                            onClick={() => navigate("/")}
                             variant="h6"
                             noWrap
                             component="a"
-                            href="#app-bar-with-responsive-menu"
                             sx={{
+                                cursor:"pointer",
                                 margin: "15px",
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
@@ -101,11 +102,12 @@ export const Header = () => {
                             </Menu>
                         </Box>}
                         <Typography
+                        onClick={() => navigate("/")}
                             variant="h5"
                             noWrap
                             component="a"
-                            href="#app-bar-with-responsive-menu"
                             sx={{
+                                cursor:"pointer",
                                 mr: 2,
                                 display: { xs: 'flex', md: 'none' },
                                 flexGrow: 1,
@@ -133,11 +135,11 @@ export const Header = () => {
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            <Tooltip title="Open settings">
+                            {/* <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                 </IconButton>
-                            </Tooltip>
+                            </Tooltip> */}
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"

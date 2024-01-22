@@ -6,4 +6,6 @@ export interface Car{
         km: number
         imageUrls: string[]
         note: string
+        hand: number
+        test: string
       }

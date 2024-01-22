@@ -1,20 +1,50 @@
 import { useParams } from "react-router-dom"
 import './CarDetails.css'
 import { useFetchDetails } from "../customHooks/useFetchDetails";
+import SwipeableTextMobileStepper from "./SwipeableTextMobileStepper";
+import { BsSpeedometer2 } from "react-icons/bs";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import { FaRegHandPaper } from "react-icons/fa";
+import { SiTestcafe } from "react-icons/si";
+
+
+
 
 export const CarDetails = () => {
     let { id } = useParams();
     const { car } = useFetchDetails(id || "")
-
+    if (!car) {
+        return
+    }
     return (
         <div id="Car">
             <div id="CarDetails">
                 <div id="details">
-                    <h1>{car?.manufacturer}</h1>
-                    <p>{car?.note}</p>
+                    <span style={{ display: 'flex' }}>
+                        <h1 style={{ marginLeft: '15px' }}>{car?.manufacturer}</h1>
+                        <h1>{car?.name}</h1>
+                    </span>
+                    <div className="lineDetails">
+                        <BsSpeedometer2 className="iconLine" />
+                        <p>{car.km}</p>
+                    </div>
+                    <div className="lineDetails">
+                        <FaRegCalendarAlt className="iconLine" />
+                        <p>{car.model}</p>
+                    </div>
+                    <div className="lineDetails">
+                        <FaRegHandPaper className="iconLine" />
+                        <p>{car.hand}</p>
+                    </div>
+                    <div className="lineDetails">
+                        <SiTestcafe className="iconLine" />
+                        <p>{car.test}</p>
+                    </div>
+                    <h3>{"על הרכב: "}</h3>
+                    <p>{car.note}</p>
                 </div>
                 <div id="images">
-                    <img style={{ maxWidth: "100%",  maxHeight: "100%" }} src={car?.imageUrls[0]} alt="" />
+                    <SwipeableTextMobileStepper images={car.imageUrls} />
                 </div>
             </div>
         </div>

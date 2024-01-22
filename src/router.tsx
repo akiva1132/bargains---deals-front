@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Header } from './components/Header';
 import { CarForSale } from './components/CarsForSale';
 import { CarDetails } from './components/CarDetails';
+import { AdministrationArea } from './components/AdministrationArea';
 
 export const router = createBrowserRouter([
   {
@@ -17,10 +18,10 @@ export const router = createBrowserRouter([
         path: "/car/:id",
         element: <CarDetails />,
       },
-      // {
-      //   path: "/erp/products",
-      //   element: <Products />,
-      // },
+      {
+        path: "AdministrationArea",
+        element: <AdministrationArea />,
+      },
       // {
       //   path: "/erp/product/:productId",
       //   element: <ProductDetailsPage />,
