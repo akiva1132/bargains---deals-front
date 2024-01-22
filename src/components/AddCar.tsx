@@ -8,12 +8,11 @@ import {
     TextField,
 } from "@mui/material";
 import { useAddCar } from "../customHooks/useAddCar";
-import { InputFileUpload } from "./InputFileUpload";
 
 const defaultTheme = createTheme();
 
 export const AddCar = () => {
-    const { waiting, error, token, fetchData } = useAddCar();
+    const { waiting, error, token } = useAddCar();
     const handleSubmit = async (event: {
         preventDefault: () => void;
         currentTarget: HTMLFormElement | undefined;
@@ -25,7 +24,7 @@ export const AddCar = () => {
         const model = data.get("model")?.toString();
         const km = data.get("km")?.toString();
         const note = data.get("note")?.toString();
-        console.log(manufacturer, name, model);
+        console.log(manufacturer, name, model, km, note);
         // await fetchData(userName || "", password || "")
         if (token) {
             localStorage.setItem("token", token)
