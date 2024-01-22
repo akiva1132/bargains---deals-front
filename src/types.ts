@@ -8,4 +8,5 @@ export interface Car{
         note: string
         hand: number
         test: string
+        price: number
       }

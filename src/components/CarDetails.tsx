@@ -8,6 +8,8 @@ import { FaRegHandPaper } from "react-icons/fa";
 import { SiTestcafe } from "react-icons/si";
 import { CircularIndeterminate } from "./CircularIndeterminate";
 import { Button } from "@mui/material";
+import { FaShekelSign } from "react-icons/fa";
+
 
 
 
@@ -50,6 +52,10 @@ export const CarDetails = () => {
                     <div className="lineDetails">
                         <SiTestcafe className="iconLine" />
                         <p>{car.test}</p>
+                    </div>
+                    <div className="lineDetails">
+                    <FaShekelSign className="iconLine" />
+                        <p>{car.price}</p>
                     </div>
                     <h3>{"על הרכב: "}</h3>
                     <p>{car.note}</p>
