@@ -16,7 +16,7 @@ import axios from "axios";
 const defaultTheme = createTheme();
 
 export const AddCar = () => {
-    const { waiting, error, setError, fetchData } = useAddCar();
+    const { waiting, error, setError, fetchData, setWaiting } = useAddCar();
     const [files, setFiles] = useState<File[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
 
@@ -38,6 +38,7 @@ export const AddCar = () => {
     }) => {
         const data = new FormData(event.currentTarget || undefined);
         event.preventDefault();
+        setWaiting(true)
         const urls = await handleUpload()
         handleValidation();
         if (isValid) {

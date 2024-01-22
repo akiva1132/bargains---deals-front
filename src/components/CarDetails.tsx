@@ -7,6 +7,7 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaRegHandPaper } from "react-icons/fa";
 import { SiTestcafe } from "react-icons/si";
 import { CircularIndeterminate } from "./CircularIndeterminate";
+import { Button } from "@mui/material";
 
 
 
@@ -47,6 +48,7 @@ export const CarDetails = () => {
                     </div>
                     <h3>{"על הרכב: "}</h3>
                     <p>{car.note}</p>
+                    <Button>{"שלח לנו וואצפ"}</Button >
                 </div>
                 <div id="images">
                     <SwipeableTextMobileStepper images={car.imageUrls} />

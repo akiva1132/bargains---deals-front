@@ -19,7 +19,7 @@ export const useAddCar = () => {
     imageUrls: string[],
   ) => {
     try {
-      setWaiting(true);
+      // setWaiting(true);
       setError("");
       console.log(1);
 
@@ -50,5 +50,5 @@ export const useAddCar = () => {
       setWaiting(false);
     }
   };
-  return { waiting, error, fetchData, setError }
+  return { waiting, error, fetchData, setError, setWaiting }
 }
