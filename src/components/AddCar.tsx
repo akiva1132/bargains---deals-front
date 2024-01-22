@@ -42,17 +42,18 @@ export const AddCar = () => {
         setWaiting(true)
         const urls = await handleUpload()
         console.log(urls);
-        
+
         handleValidation();
         if (isValid) {
             const manufacturer = data.get("manufacturer")?.toString() || "";
             const name = data.get("name")?.toString() || "";
             const model = Number(data.get("model")) || 0;
             const km = Number(data.get("km")) || 0;
+            const price = Number(data.get("price")) || 0;
             const hand = Number(data.get("hand")) || 0;
             const test = data.get("test")?.toString() || "";
             const note = data.get("note")?.toString() || "";
-            fetchData(manufacturer, name, model, km, hand, test, note, urls)
+            fetchData(manufacturer, name, model, km, hand, test, note, urls, price)
         }
         else {
             setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")
@@ -148,6 +149,17 @@ export const AddCar = () => {
                                 label='ק"מ'
                                 name="km"
                                 autoComplete="km"
+                                autoFocus
+                                type="number"
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="price"
+                                label='מחיר'
+                                name="price"
+                                autoComplete="price"
                                 autoFocus
                                 type="number"
                             />
