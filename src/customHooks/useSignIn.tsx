@@ -9,6 +9,11 @@ export const useSignIn = () =>{
     const [token, setToken] = useState("");
 
 
+    if (token){
+      localStorage.setItem("token", token)
+      location.reload();
+  }
+
     const fetchData = async (userName: string, password: string) => {
         try {
         setWaiting(true)

@@ -16,7 +16,7 @@ import { useSignIn } from "../customHooks/useSignIn";
 const defaultTheme = createTheme();
 
 export const SignIn = () => {
-    const { waiting, error, token, fetchData } = useSignIn();
+    const { waiting, error, fetchData } = useSignIn();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event: {
@@ -29,10 +29,6 @@ export const SignIn = () => {
     const password = data.get("password")?.toString();
     console.log(userName, password);
     await fetchData(userName || "", password || "")
-    if (token){
-        localStorage.setItem("token", token)
-        location.reload();
-    }
   };
 
   const handleClickShowPassword = () => {
