@@ -83,6 +83,7 @@ export const AddCar = () => {
                 }));
             } catch (error) {
                 console.error('Error uploading files:', error);
+                if (error instanceof Error) setError(error.message)
                 return [];
             }
         } else {
