@@ -28,9 +28,9 @@ export const SwipeableTextMobileStepper = ({images}:{images:string[]}) => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStepChange = (step: number) => {
-    setActiveStep(step);
-  };
+  // const handleStepChange = (step: number) => {
+  //   setActiveStep(step);
+  // };
 
   return (
     <Box dir="ltr" sx={{ maxWidth: 400, flexGrow: 1 }}>
