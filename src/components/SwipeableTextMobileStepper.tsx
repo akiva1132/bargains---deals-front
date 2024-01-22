@@ -58,6 +58,8 @@ export const SwipeableTextMobileStepper = ({images}:{images:string[]}) => {
               <Box
                 component="img"
                 sx={{
+                  objectFit: 'cover',
+                  maxHeight:"300px",
                   height: "auto",
                   display: 'block',
                   maxWidth: 400,

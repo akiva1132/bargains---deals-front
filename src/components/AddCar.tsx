@@ -198,6 +198,9 @@ export const AddCar = () => {
                                 <input type="file" onChange={handleFileChange} />
                                 <input type="file" onChange={handleFileChange} />
                                 <input type="file" onChange={handleFileChange} />
+                                <input type="file" onChange={handleFileChange} />
+                                <input type="file" onChange={handleFileChange} />
+                                <input type="file" onChange={handleFileChange} />
                             </div>
                             <Button
                                 type="submit"

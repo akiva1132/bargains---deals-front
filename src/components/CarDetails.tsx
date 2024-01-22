@@ -61,7 +61,7 @@ export const CarDetails = () => {
                     <p>{car.note}</p>
                     <div id="sendMessage">
                     <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                    <Button variant="contained">שלח לנו הודעה</Button>
+                    <Button sx={{marginBottom:"60px"}} variant="contained">שלח לנו הודעה</Button>
                     </a>
                     </div>
                 </div>
