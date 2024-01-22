@@ -6,6 +6,7 @@ import { BsSpeedometer2 } from "react-icons/bs";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { FaRegHandPaper } from "react-icons/fa";
 import { SiTestcafe } from "react-icons/si";
+import { CircularIndeterminate } from "./CircularIndeterminate";
 
 
 
@@ -14,7 +15,11 @@ export const CarDetails = () => {
     let { id } = useParams();
     const { car } = useFetchDetails(id || "")
     if (!car) {
-        return
+        return (
+            <div className="progress">
+                <CircularIndeterminate />
+            </div>
+        )
     }
     return (
         <div id="Car">
