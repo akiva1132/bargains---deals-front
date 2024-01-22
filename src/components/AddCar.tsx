@@ -24,7 +24,8 @@ export const AddCar = () => {
         setIsValid(true);
         const requiredFields = ["manufacturer", "name", "model"];
         requiredFields.forEach(field => {
-            const value = document.getElementById(field)?.value;
+            const elements = document.getElementById(field) as any
+            const value = elements?.value;
             if (!value || value.trim() === "" || files[0] === undefined) {
                 setIsValid(false);
             }
