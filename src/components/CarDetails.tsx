@@ -12,6 +12,7 @@ import { FaShekelSign } from "react-icons/fa";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Divider from '@mui/material/Divider';
 
 
 
@@ -48,50 +49,57 @@ export const CarDetails = () => {
             });
     }
     const phoneNumber = '+972532467781'
-    const messageText = `היי, אני פונה בקשר למודעה לגבי ה${car.manufacturer} ${car.model}`
+    const messageText = `היי, אני פונה בקשר למודעה לגבי ה${car.manufacturer} ${car.name}`
     const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${messageText}`;
     return (
-        <div id="Car">
-            <div id="CarDetails">
-                <div id="details">
-                    <span style={{ display: 'flex' }}>
-                        <h1 style={{ marginLeft: '15px' }}>{car?.manufacturer}</h1>
-                        <h1>{car?.name}</h1>
-                    </span>
-                    <div className="lineDetails">
-                        <BsSpeedometer2 className="iconLine" />
-                        <p>{car.km}</p>
+        <div>
+            <div id="Car">
+                <div id="CarDetails">
+                    <div id="details">
+                        <Divider />
+                        <span style={{ display: 'flex' }}>
+                            <h1 style={{ marginLeft: '15px' }}>{car?.manufacturer}</h1>
+                            <h1>{car?.name}</h1>
+                        </span>
+                        <Divider />
+                        <div id="dtailsTop">
+                            <div className="lineDetails">
+                                <BsSpeedometer2 className="iconLine" />
+                                <p>{car.km}</p>
+                            </div>
+                            <div className="lineDetails">
+                                <FaRegCalendarAlt className="iconLine" />
+                                <p>{car.model}</p>
+                            </div>
+                            <div className="lineDetails">
+                                <FaRegHandPaper className="iconLine" />
+                                <p>{car.hand}</p>
+                            </div>
+                        </div>
+                        <Divider />
+                        <div className="lineDetails">
+                            <SiTestcafe className="iconLine" />
+                            <p>{car.test}</p>
+                        </div>
+                        <div className="lineDetails">
+                            <FaShekelSign className="iconLine" />
+                            <p>{car.price}</p>
+                        </div>
+                        <h3>{"על הרכב: "}</h3>
+                        <p>{car.note || "אין מידע נוסף"}</p>
                     </div>
-                    <div className="lineDetails">
-                        <FaRegCalendarAlt className="iconLine" />
-                        <p>{car.model}</p>
-                    </div>
-                    <div className="lineDetails">
-                        <FaRegHandPaper className="iconLine" />
-                        <p>{car.hand}</p>
-                    </div>
-                    <div className="lineDetails">
-                        <SiTestcafe className="iconLine" />
-                        <p>{car.test}</p>
-                    </div>
-                    <div className="lineDetails">
-                        <FaShekelSign className="iconLine" />
-                        <p>{car.price}</p>
-                    </div>
-                    <h3>{"על הרכב: "}</h3>
-                    <p>{car.note}</p>
-                    <div id="sendMessage">
-                        {token && <IconButton sx={{ height: "35px" }} color="secondary" aria-label="delete" onClick={handleDelete}>
-                            <DeleteIcon />
-                        </IconButton>}
-                        <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                            <Button sx={{ marginBottom: "60px" }} variant="contained">שלח לנו הודעה</Button>
-                        </a>
+                    <div id="images">
+                        <SwipeableTextMobileStepper images={car.imageUrls} />
                     </div>
                 </div>
-                <div id="images">
-                    <SwipeableTextMobileStepper images={car.imageUrls} />
-                </div>
+            </div>
+            <div id="sendMessage">
+                {token && <IconButton sx={{ height: "35px" }} color="secondary" aria-label="delete" onClick={handleDelete}>
+                    <DeleteIcon />
+                </IconButton>}
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    <Button sx={{ marginBottom: "60px" }} variant="contained">קישור ישיר לוואצפ</Button>
+                </a>
             </div>
         </div>
     )
