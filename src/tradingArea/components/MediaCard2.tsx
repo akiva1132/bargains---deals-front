@@ -14,7 +14,7 @@ import { CustomizedSnackbars } from './CustomizedSnackbars';
 
 
 
-  export const MediaCard = ({ detsils }: { detsils: Car }) => {
+  export const MediaCard2 = ({ detsils }: { detsils: Car }) => {
     const [liked, setLiked] = useState(false);
     const [open, setOpen] = useState(false);
     const [message, setMessage] = useState("");
@@ -45,7 +45,7 @@ import { CustomizedSnackbars } from './CustomizedSnackbars';
 
     const navigate = useNavigate();
     return (
-      <div onClick={() => navigate(`/to-car/car/${detsils._id}`)}>
+      <div onClick={() => navigate(`/tradingArea/car/${detsils._id}`)}>
         <CustomizedSnackbars title={message} open={open} setOpen={setOpen}/>
         <Card sx={{ maxWidth: 345, margin: "10px", cursor: "pointer" }}>
           <CardMedia

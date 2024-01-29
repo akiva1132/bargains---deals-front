@@ -17,3 +17,10 @@ body{
   align-items: center;
   justify-content: space-around;
 }
+
+.buttonHader{
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

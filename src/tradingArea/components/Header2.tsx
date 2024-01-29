@@ -7,33 +7,50 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import { Outlet } from 'react-router-dom';
+import { Avatar, Tooltip } from '@mui/material';
+import { FaPlus } from "react-icons/fa6";
 
 
 
 
 
-const pages: string[] = [];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export const Header = () => {
+
+
+export const Header2 = () => {
     const navigate = useNavigate();
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
+    const token = localStorage.getItem("token2")
+
+    const pages: string[] = token?["מודעה חדשה"]:[]
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
-    // const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    //     setAnchorElUser(event.currentTarget);
-    // };
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
+    };
+
+    const handleClickAddCar = () => {
+        navigate("/tradingArea/AddCar/")
+        setAnchorElNav(null);
+    };
+
+    const handleLogOut = () => {
+        localStorage.setItem("token2", "")
+        setAnchorElUser(null);
+        navigate("/tradingArea/")
+        window.location.reload()
     };
 
     const handleCloseUserMenu = () => {
@@ -46,12 +63,12 @@ export const Header = () => {
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                         <Typography
-                            onClick={() => navigate("/to-car/")}
+                            onClick={() => navigate("/tradingArea/")}
                             variant="h6"
                             noWrap
                             component="a"
                             sx={{
-                                cursor:"pointer",
+                                cursor: "pointer",
                                 margin: "15px",
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
@@ -61,7 +78,7 @@ export const Header = () => {
                                 textDecoration: 'none',
                             }}
                         >
-                            {"טו קאר השכרת רכב"}
+                            {"אזור סחר"}
                         </Typography>
 
                         {pages[0] != null && <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -94,19 +111,20 @@ export const Header = () => {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <MenuItem key={page} onClick={handleClickAddCar}>
                                         <Typography textAlign="center">{page}</Typography>
+                                        <FaPlus />
                                     </MenuItem>
                                 ))}
                             </Menu>
                         </Box>}
                         <Typography
-                        onClick={() => navigate("/to-car/")}
+                            onClick={() => navigate("/tradingArea/")}
                             variant="h5"
                             noWrap
                             component="a"
                             sx={{
-                                cursor:"pointer",
+                                cursor: "pointer",
                                 mr: 2,
                                 display: { xs: 'flex', md: 'none' },
                                 flexGrow: 1,
@@ -116,28 +134,34 @@ export const Header = () => {
                                 textDecoration: 'none',
                             }}
                         >
-                            <div style={{width:"70%", fontSize:"22px"}} id='titleHader'>
-                            {"טו קאר השכרת רכב"}
+                            <div style={{ width: "70%", fontSize: "22px" }} id='titleHader'>
+                                {"אזור סחר"}
                             </div>
                         </Typography>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: "50px", flexDirection: "row-reverse" }}>
                             {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
+                                <div className='buttonHader'>
+                                    <Button
+                                        key={page}
+                                        onClick={handleClickAddCar}
+                                        sx={{ my: 2, color: 'white', display: 'block' }}
+                                    >
+                                        {page}
+                                    </Button>
+                                    <FaPlus />
+                                </div>
+
+
                             ))}
                         </Box>
 
                         <Box sx={{ flexGrow: 0 }}>
-                            {/* <Tooltip title="Open settings">
+                            {token && <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
                                 </IconButton>
-                            </Tooltip> */}
+                            </Tooltip>}
                             <Menu
                                 sx={{ mt: '45px' }}
                                 id="menu-appbar"
@@ -154,11 +178,9 @@ export const Header = () => {
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
                             >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center">{setting}</Typography>
-                                    </MenuItem>
-                                ))}
+                                <MenuItem onClick={handleLogOut}>
+                                    <Typography textAlign="center">{"התנתק מהמערכת"}</Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                     </Toolbar>

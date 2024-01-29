@@ -10,16 +10,19 @@ import {
 } from "@mui/material";
 import { useAddCar } from "../customHooks/useAddCar";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+
 
 
 
 const defaultTheme = createTheme();
 
-export const AddCar = () => {
+export const AddCar2 = () => {
     const { waiting, error, setError, fetchData, setWaiting } = useAddCar();
     const [files, setFiles] = useState<File[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
-
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token2")
     const handleValidation = () => {
         setIsValid(true);
         const requiredFields = ["manufacturer", "name", "model"];
@@ -89,8 +92,7 @@ export const AddCar = () => {
         }
         return uploadedUrls;
     }
-
-
+    if (token === "") navigate("/tradingArea/")
     return (
         <div id="logIn">
             <h2>{"פרסום מודעה חדשה"}</h2>

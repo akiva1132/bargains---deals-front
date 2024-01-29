@@ -35,14 +35,14 @@ export const useAddCar = () => {
         note: note,
         price: price
       });
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/addCar`, data, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/addCar`, data, {
         headers: {
-          'Authorization': localStorage.getItem("token"),
+          'Authorization': localStorage.getItem("token2"),
           'Content-Type': 'application/json'
         },
       });
       console.log(response.data);
-      navigate("/to-car/")
+      navigate("/tradingArea")
     } catch (error: any) {
       // setError(error.response.data);
       console.error('Error fetching data:', error);

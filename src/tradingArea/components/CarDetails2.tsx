@@ -18,9 +18,9 @@ import Divider from '@mui/material/Divider';
 
 
 
-export const CarDetails = () => {
+export const CarDetails2 = () => {
     const navigate = useNavigate();
-    let { id } = useParams();
+    const { id } = useParams();
     const { car } = useFetchDetails(id || "")
     if (!car) {
         return (
@@ -31,17 +31,17 @@ export const CarDetails = () => {
     }
     const token = localStorage.getItem("token")
     const handleDelete = () => {
-        let config = {
+        const config = {
             method: 'delete',
             maxBodyLength: Infinity,
-            url: `${import.meta.env.VITE_BASE_URL}/${car._id}`,
+            url: `${import.meta.env.VITE_BASE_URL}/auction/${car._id}`,
             headers: {
                 'Authorization': token
             }
         };
         axios.request(config)
             .then((response) => {
-                navigate("/to-car/")
+                navigate("/tradingArea/")
                 console.log(JSON.stringify(response.data));
             })
             .catch((error) => {

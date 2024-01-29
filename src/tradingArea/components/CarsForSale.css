@@ -1,0 +1,34 @@
+#CarForSale{
+    display: flex;
+    background-color: rgb(240, 240, 245);
+    width: 100 vw;
+    justify-content: space-around;
+    flex-direction: column;
+}
+#title{
+    display: flex;
+    justify-content: space-around;
+}
+#cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 10px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.buttons{
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.FcLike{
+    cursor: pointer;
+}
+
+.IoMdShare{
+    cursor: pointer;
+}
+.css-1xgsf0v{
+    height: auto;
+}

@@ -3,37 +3,46 @@ import { Header } from './components/Header';
 import { CarForSale } from './components/CarsForSale';
 import { CarDetails } from './components/CarDetails';
 import { AdministrationArea } from './components/AdministrationArea';
+import { Header2 } from './tradingArea/components/Header2';
+import { CarDetails2 } from './tradingArea/components/CarDetails2';
+import { UserReferral } from './tradingArea/components/UserReferral';
+import { AddCar2 } from './tradingArea/components/AddCar2';
 
 export const router = createBrowserRouter([
   {
-
-    path: "/",
+    path: "/to-car",
     element: <Header />,
     children: [
       {
-        path: "/",
+        path: "/to-car/",
         element: <CarForSale />,
       },
       {
-        path: "/car/:id",
+        path: "/to-car/car/:id",
         element: <CarDetails />,
       },
       {
-        path: "AdministrationArea",
+        path: "/to-car/AdministrationArea",
         element: <AdministrationArea />,
+      }
+    ],
+  },
+  {
+    path: "/tradingArea",
+    element: <Header2 />,
+    children: [
+      {
+        path: "/tradingArea/",
+        element: <UserReferral />,
       },
-      // {
-      //   path: "/erp/product/:productId",
-      //   element: <ProductDetailsPage />,
-      // },
-      // {
-      //   path: "/erp/AddProduct",
-      //   element: <AddProduct />,
-      // },
-      // {
-      //   path: "/erp/AddProduct/:id",
-      //   element: <AddProduct />,
-      // },
+      {
+        path: "/tradingArea/car/:id",
+        element: <CarDetails2 />,
+      },
+      {
+        path: "/tradingArea/AddCar/",
+        element: <AddCar2 />,
+      }
     ],
   },
 ]);
