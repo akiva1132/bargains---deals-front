@@ -17,7 +17,8 @@ export const useAddCar = () => {
     test :string,
     note: string,
     imageUrls: string[],
-    price:number
+    price:number,
+    advertiser: string
   ) => {
     try {
       // setWaiting(true);
@@ -33,7 +34,8 @@ export const useAddCar = () => {
         test: test,
         imageUrls: imageUrls,
         note: note,
-        price: price
+        price: price,
+        advertiser: advertiser
       });
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/addCar`, data, {
         headers: {

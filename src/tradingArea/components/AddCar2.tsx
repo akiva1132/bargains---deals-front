@@ -8,9 +8,10 @@ import {
     LinearProgress,
     TextField,
 } from "@mui/material";
-import { useAddCar } from "../customHooks/useAddCar";
+import { useAddCar2 } from "../customHooks/useAddCar";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -18,11 +19,12 @@ import { useNavigate } from 'react-router-dom';
 const defaultTheme = createTheme();
 
 export const AddCar2 = () => {
-    const { waiting, error, setError, fetchData, setWaiting } = useAddCar();
+    const { waiting, error, setError, fetchData, setWaiting } = useAddCar2();
     const [files, setFiles] = useState<File[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
     const navigate = useNavigate();
-    const token = localStorage.getItem("token2")
+    const token = localStorage.getItem("token2") || ""
+    const decoded = jwtDecode(token) as any;
     const handleValidation = () => {
         setIsValid(true);
         const requiredFields = ["manufacturer", "name", "model"];
@@ -56,7 +58,8 @@ export const AddCar2 = () => {
             const hand = Number(data.get("hand")) || 0;
             const test = data.get("test")?.toString() || "";
             const note = data.get("note")?.toString() || "";
-            fetchData(manufacturer, name, model, km, hand, test, note, urls, price)
+            const advertiser = decoded.userId
+            fetchData(manufacturer, name, model, km, hand, test, note, urls, price, advertiser)
         }
         else {
             setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")

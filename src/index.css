@@ -24,3 +24,11 @@ body{
   align-items: center;
   justify-content: center;
 }
+
+#UserList{
+  display: flex;
+  background-color: rgb(240, 240, 245);
+  width: 80vw;
+  justify-content: space-around;
+  flex-direction: column;
+}

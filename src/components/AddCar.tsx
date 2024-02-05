@@ -53,7 +53,8 @@ export const AddCar = () => {
             const hand = Number(data.get("hand")) || 0;
             const test = data.get("test")?.toString() || "";
             const note = data.get("note")?.toString() || "";
-            fetchData(manufacturer, name, model, km, hand, test, note, urls, price)
+            const advertiser = "65aea0acc441c41c37188519"
+            fetchData(manufacturer, name, model, km, hand, test, note, urls, price, advertiser)
         }
         else {
             setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")

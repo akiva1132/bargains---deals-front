@@ -16,6 +16,8 @@
     "@mui/joy": "^5.0.0-beta.24",
     "@mui/material": "^5.15.5",
     "axios": "^1.6.5",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
@@ -24,6 +26,7 @@
     "react-swipeable-views-utils": "^0.14.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@types/react-swipeable-views": "^0.13.5",
