@@ -5,38 +5,49 @@ import {
     Button,
     Container,
     CssBaseline,
+    IconButton,
+    InputAdornment,
     LinearProgress,
     TextField,
 } from "@mui/material";
-import { useAddCar2 } from "../customHooks/useAddCar";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import { jwtDecode } from "jwt-decode";
+import { useSignUp } from '../customHooks/useSignUp';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 
 
 
 const defaultTheme = createTheme();
 
-export const AddCar2 = () => {
-    const { waiting, error, setError, fetchData, setWaiting } = useAddCar2();
+export const SignUp = () => {
+    const { waiting, error, setError, fetchData, setWaiting } = useSignUp();
     const [files, setFiles] = useState<File[]>([]);
     const [isValid, setIsValid] = useState<boolean>(true);
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token2") || ""
-    const decoded = token?jwtDecode(token) as any:null;
+    const [showPassword, setShowPassword] = useState(false);
+
+
+
+
     const handleValidation = () => {
         setIsValid(true);
-        const requiredFields = ["manufacturer", "name", "model"];
+        const requiredFields = ["userName", "password", "firstName", ];
         requiredFields.forEach(field => {
+            console.log(field);
+            
             const elements = document.getElementById(field) as any
             const value = elements?.value;
-            if (!value || value.trim() === "" || files[0] === undefined) {
+            if (!value || value.trim() === "") {
                 setIsValid(false);
             }
         });
     };
+    
 
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+      };
+
+      
     const handleSubmit = async (event: {
         preventDefault: () => void;
         currentTarget: HTMLFormElement | undefined;
@@ -50,16 +61,13 @@ export const AddCar2 = () => {
 
         handleValidation();
         if (isValid) {
-            const manufacturer = data.get("manufacturer")?.toString() || "";
-            const name = data.get("name")?.toString() || "";
-            const model = Number(data.get("model")) || 0;
-            const km = Number(data.get("km")) || 0;
-            const price = Number(data.get("price")) || 0;
-            const hand = Number(data.get("hand")) || 0;
-            const test = data.get("test")?.toString() || "";
-            const note = data.get("note")?.toString() || "";
-            const advertiser = decoded ? decoded.userId: ""
-            fetchData(manufacturer, name, model, km, hand, test, note, urls, price, advertiser)
+            const userName = data.get("userName")?.toString() || "";
+            const password = data.get("password")?.toString() || "";
+            const firstName = data.get("firstName")?.toString() || ""
+            const lastName = data.get("lastName")?.toString() || "";
+            const phone = Number(data.get("phone")) || 0;
+            const profileImage = "" //data.get("note")?.toString() || "";
+            fetchData(userName, password, firstName, lastName, phone, profileImage)
         }
         else {
             setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")
@@ -95,10 +103,9 @@ export const AddCar2 = () => {
         }
         return uploadedUrls;
     }
-    if (token === "") navigate("/tradingArea/")
     return (
         <div id="logIn">
-            <h2>{"פרסום מודעה חדשה"}</h2>
+            <h2>{"הרשמה למערכת"}</h2>
             <ThemeProvider theme={defaultTheme}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
@@ -119,85 +126,52 @@ export const AddCar2 = () => {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="manufacturer"
-                                label="יצרן"
-                                name="manufacturer"
-                                autoComplete="manufacturer"
+                                id="userName"
+                                label="כתובת מייל"
+                                name="userName"
+                                autoComplete="userName"
                                 autoFocus
                             />
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="name"
-                                label="שם דגם"
-                                name="name"
-                                autoComplete="name"
+                                id="firstName"
+                                label="שם פרטי"
+                                name="firstName"
+                                autoComplete="firstName"
                             />
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="model"
-                                label="שנה"
-                                name="model"
-                                autoComplete="model"
-                                type="number"
+                                id="lastName"
+                                label="שם משפחה"
+                                name="lastName"
+                                autoComplete="lastName"
+                                type="text"
                             />
+
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="km"
-                                label='ק"מ'
-                                name="km"
-                                autoComplete="km"
-                                type="number"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="price"
-                                label='מחיר'
-                                name="price"
-                                autoComplete="price"
-                                type="number"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="hand"
-                                label="יד"
-                                name="hand"
-                                autoComplete="hand"
-                                type="number"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="test"
-                                label="טסט עד"
-                                name="test"
-                                autoComplete="test"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="note"
-                                label="הערות נוספות"
-                                name="note"
-                                autoComplete="note"
+                                name="password"
+                                label="Password"
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                autoComplete="current-password"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton edge="end" onClick={handleClickShowPassword}>
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <div>
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
                                 <input type="file" onChange={handleFileChange} />
                             </div>
                             <Button

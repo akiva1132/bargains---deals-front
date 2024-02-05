@@ -8,6 +8,7 @@ import { CarDetails2 } from './tradingArea/components/CarDetails2';
 import { UserReferral } from './tradingArea/components/UserReferral';
 import { AddCar2 } from './tradingArea/components/AddCar2';
 import { Lot } from './tradingArea/components/Lot';
+import { SignUp } from './tradingArea/components/SignUp';
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: "/tradingArea/lot/:userId",
         element: <Lot/>,
+      },
+      {
+        path: "/tradingArea/SignUp/",
+        element: <SignUp/>,
       }
     ],
   },

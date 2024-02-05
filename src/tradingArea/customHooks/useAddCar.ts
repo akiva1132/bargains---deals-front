@@ -40,6 +40,8 @@ export const useAddCar2 = () => {
         price: price,
         advertiser: advertiser
       });
+      console.log(data);
+      
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/addCar`, data, {
         headers: {
           'Authorization': localStorage.getItem("token2"),
@@ -49,6 +51,7 @@ export const useAddCar2 = () => {
       console.log(response.data);
       navigate("/tradingArea")
     } catch (error: any) {
+      setError(error.response.data)
       console.error('Error fetching data:', error);
     } finally {
       setWaiting(false);
