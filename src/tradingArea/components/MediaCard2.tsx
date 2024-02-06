@@ -29,11 +29,11 @@ import { CustomizedSnackbars } from './CustomizedSnackbars';
   
     const handleShare = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      const copyText = `הנה מודעה שחשבתי שתעניין אותך  לגבי ה${detsils.manufacturer + " " + detsils.name} https://bargains-deals-front.onrender.com/tradingArea/car/${detsils._id}`
+      const copyText = `הנה מודעה שחשבתי שתעניין אותך  לגבי ה${detsils.manufacturer + " " + detsils.name}`
   
       try {
         // await navigator.clipboard.writeText(copyText);
-        navigator.share({title:"TitleConst", text:"DescriptionConst", url:copyText});
+        navigator.share({title:"שיתוף מודעה", text: copyText, url:`https://bargains-deals-front.onrender.com/tradingArea/car/${detsils._id}`});
         // setMessage("הטקסט הועתק ללוח");
         // setOpen(true);
       } catch (err) {
