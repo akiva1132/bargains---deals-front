@@ -29,12 +29,13 @@ import { CustomizedSnackbars } from './CustomizedSnackbars';
   
     const handleShare = async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();
-      const copyText = `הנה מודעה שחשבתי שמתעניין אותך https://bargains-deals-front.onrender.com/tradingArea/car/${detsils._id}`
+      const copyText = `הנה מודעה שחשבתי שתעניין אותך  לגבי ה${detsils.manufacturer + " " + detsils.name} https://bargains-deals-front.onrender.com/tradingArea/car/${detsils._id}`
   
       try {
-        await navigator.clipboard.writeText(copyText);
-        setMessage("הטקסט הועתק ללוח");
-        setOpen(true);
+        // await navigator.clipboard.writeText(copyText);
+        navigator.share({title:"TitleConst", text:"DescriptionConst", url:copyText});
+        // setMessage("הטקסט הועתק ללוח");
+        // setOpen(true);
       } catch (err) {
         console.error('Unable to copy text to clipboard', err);
         setMessage("הטקסט לא ניתן להעתיק ללוח");
