@@ -18,9 +18,8 @@ export const useSignUp = () => {
   const fetchData = async (
     userName: string,
     password: string,
-    firstName: string,
-    lastName: string,
-    phone: number,
+    phone: string,
+    fullName: string,
     profileImage: string,
   ) => {
     try {
@@ -30,20 +29,20 @@ export const useSignUp = () => {
       const data = {
         userName: userName,
         password: password,
-        firstName: firstName,
-        lastName: lastName,
         phone: phone,
+        fullName: fullName,
         profileImage: profileImage,
+        numberAds: 0
       }
-
       console.log(data);
-      
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/register/`, data, {
       });
       console.log(response.data);
       localStorage.setItem("token2", response.data)
       navigate("/tradingArea")
     } catch (error: any) {
+      console.log(error);
+      
         setError(error.response.data)
       console.error('Error fetching data:', error);
     } finally {

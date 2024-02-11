@@ -140,10 +140,9 @@ export const Header2 = () => {
                         </Typography>
 
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: "50px", flexDirection: "row-reverse" }}>
-                            {pages.map((page) => (
-                                <div className='buttonHader'>
+                            {pages.map((page, index) => (
+                                <div key={index} className='buttonHader'>
                                     <Button
-                                        key={page}
                                         onClick={handleClickAddCar}
                                         sx={{ my: 2, color: 'white', display: 'block' }}
                                     >

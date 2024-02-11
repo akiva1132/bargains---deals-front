@@ -1,201 +1,179 @@
-import { useState } from 'react';
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
-    Box,
-    Button,
-    Container,
-    CssBaseline,
-    IconButton,
-    InputAdornment,
-    LinearProgress,
-    TextField,
+  TextField,
+  Button,
+  Container,
+  IconButton,
+  InputAdornment,
+  Box,
+  LinearProgress
 } from "@mui/material";
+import { useState } from "react";
+import { useSignUp } from "../customHooks/useSignUp";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { signUpSchema } from "../validationSchema";
 import axios from "axios";
-import { useSignUp } from '../customHooks/useSignUp';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-
-
-
-
-const defaultTheme = createTheme();
 
 export const SignUp = () => {
-    const { waiting, error, setError, fetchData, setWaiting } = useSignUp();
-    const [files, setFiles] = useState<File[]>([]);
-    const [isValid, setIsValid] = useState<boolean>(true);
-    const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [urlFile, setUrlFile] = useState<string | null>(null);
+  const [modeButton, setModeButton] = useState<boolean>(true);
+  const { waiting, error, fetchData, setError, setWaiting } = useSignUp()
 
-
-
-
-    const handleValidation = () => {
-        setIsValid(true);
-        const requiredFields = ["userName", "password", "firstName", ];
-        requiredFields.forEach(field => {
-            console.log(field);
-            
-            const elements = document.getElementById(field) as any
-            const value = elements?.value;
-            if (!value || value.trim() === "") {
-                setIsValid(false);
-            }
-        });
-    };
-    
-
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-      };
-
-      
-    const handleSubmit = async (event: {
-        preventDefault: () => void;
-        currentTarget: HTMLFormElement | undefined;
-    }) => {
-        const data = new FormData(event.currentTarget || undefined);
-        event.preventDefault();
-        setError("")
-        setWaiting(true)
-        const urls = await handleUpload()
-        console.log(urls);
-
-        handleValidation();
-        if (isValid) {
-            const userName = data.get("userName")?.toString() || "";
-            const password = data.get("password")?.toString() || "";
-            const firstName = data.get("firstName")?.toString() || ""
-            const lastName = data.get("lastName")?.toString() || "";
-            const phone = Number(data.get("phone")) || 0;
-            const profileImage = "" //data.get("note")?.toString() || "";
-            fetchData(userName, password, firstName, lastName, phone, profileImage)
-        }
-        else {
-            setError("יש למלא את כל השדות ולצרף תמונה אחת לפחות")
-            console.log("notvalod");
-        }
-    };
-
-    const handleFileChange = (e: any) => {
-        const selectedFile = e.target.files[0];
-        if (selectedFile) {
-            setFiles([...files, selectedFile]);
-        }
-    };
-
-    const handleUpload = async () => {
-        const uploadedUrls: string[] = [];
-        if (files.length > 0) {
-            try {
-                await Promise.all(files.map(async (file) => {
-                    const formData = new FormData();
-                    formData.append('file', file);
-                    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/upload`, formData);
-                    uploadedUrls.push(response.data);
-                }));
-            } catch (error) {
-                console.error('Error uploading files:', error);
-                if (error instanceof Error) setError(error.message)
-                return [];
-            }
-        } else {
-            console.error('No files selected');
-            return [];
-        }
-        return uploadedUrls;
+  const handleFileChange = (e: any) => {
+    setModeButton(false)
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      console.log(selectedFile);
+      uploadFile(selectedFile)
+        .then(url => { setUrlFile(url), setModeButton(true) })
+        .catch(a => console.log(a))
+      console.log("url: ", urlFile);
     }
-    return (
-        <div id="logIn">
-            <h2>{"הרשמה למערכת"}</h2>
-            <ThemeProvider theme={defaultTheme}>
-                <Container component="main" maxWidth="xs">
-                    <CssBaseline />
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Box
-                            component="form"
-                            onSubmit={handleSubmit}
-                            noValidate
-                            sx={{ mt: 1 }}
-                        >
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="userName"
-                                label="כתובת מייל"
-                                name="userName"
-                                autoComplete="userName"
-                                autoFocus
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="שם פרטי"
-                                name="firstName"
-                                autoComplete="firstName"
-                            />
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="שם משפחה"
-                                name="lastName"
-                                autoComplete="lastName"
-                                type="text"
-                            />
+  };
+  const uploadFile = async (selectedFile: File) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/upload`, formData);
+      console.log(response.data);
+      return response.data
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      throw error
+    }
+  }
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
-                            <TextField
-                                margin="normal"
-                                required
-                                fullWidth
-                                name="password"
-                                label="Password"
-                                type={showPassword ? "text" : "password"}
-                                id="password"
-                                autoComplete="current-password"
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton edge="end" onClick={handleClickShowPassword}>
-                                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            <div>
-                                <input type="file" onChange={handleFileChange} />
-                            </div>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                                onClick={handleValidation}
-                            >
-                                {"שלח"}
-                            </Button>
-                        </Box>
-                        {error ? (
-                            <p>{error}</p>
-                        ) : (
-                            waiting && (
-                                <Box sx={{ width: "100%" }}>
-                                    <LinearProgress />
-                                </Box>
-                            )
-                        )}
-                    </Box>
-                </Container>
-            </ThemeProvider>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(signUpSchema),
+  });
+
+  const onSubmit = (user: any) => {
+    const { username, password, fullname, phone } = user;
+    setError("")
+    setWaiting(true)
+    fetchData(
+      username,
+      password,
+      phone,
+      fullname,
+      urlFile || "",
+    )
+  };
+
+  return (
+    <Container maxWidth="xs">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField
+          {...register("username")}
+          label="כתובת מייל"
+          fullWidth
+          margin="normal"
+          error={!!errors.username}
+          helperText={errors?.username?.message}
+          InputLabelProps={{
+            style: { textAlign: 'right' }
+          }}
+        />
+        <TextField
+          {...register("fullname")}
+          label="שם מלא/שם מגרש"
+          fullWidth
+          margin="normal"
+          error={!!errors.username}
+          helperText={errors?.username?.message}
+          InputLabelProps={{
+            style: { textAlign: 'right' }
+          }}
+        />
+        <TextField
+          {...register("phone")}
+          label="טלפון"
+          fullWidth
+          margin="normal"
+          error={!!errors.username}
+          helperText={errors?.username?.message}
+          InputLabelProps={{
+            style: { textAlign: 'right' }
+          }}
+        />
+        <TextField
+          {...register("password")}
+          label="סיסמא"
+          type={showPassword ? "text" : "password"}
+          fullWidth
+          margin="normal"
+          error={!!errors.password}
+          helperText={errors?.password?.message}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton edge="end" onClick={handleClickShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <TextField
+          {...register("confirmPassword")}
+          label="אימות סיסמא"
+          type={showConfirmPassword ? "text" : "password"}
+          fullWidth
+          margin="normal"
+          error={!!errors.confirmPassword}
+          helperText={errors?.confirmPassword?.message}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton edge="end" onClick={handleClickShowConfirmPassword}>
+                  {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <div>
+          <Button variant="outlined" component="label">
+            {file ? file.name : "העלאת תמונה (אופציונלי)"}
+            <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+          </Button>
         </div>
-    );
-};
+        {error
+        ? error && <p>{error}</p>
+        : waiting && (
+          <Box sx={{ width: "100%", marginTop:"20px"}}>
+            <LinearProgress />
+          </Box>
+        )}
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          sx={{
+            width: "100%",
+            mt: 2,
+            backgroundColor: modeButton ? 'primary.main' : 'grey.300',
+          }}
+          disabled={!modeButton}
+        >
+          Sign up
+        </Button>
+      </form>
+    </Container>
+  );
+}

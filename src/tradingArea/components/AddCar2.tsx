@@ -24,7 +24,7 @@ export const AddCar2 = () => {
     const [isValid, setIsValid] = useState<boolean>(true);
     const navigate = useNavigate();
     const token = localStorage.getItem("token2") || ""
-    const decoded = token?jwtDecode(token) as any:null;
+    const decoded = token ? jwtDecode(token) as any : null;
     const handleValidation = () => {
         setIsValid(true);
         const requiredFields = ["manufacturer", "name", "model"];
@@ -58,7 +58,7 @@ export const AddCar2 = () => {
             const hand = Number(data.get("hand")) || 0;
             const test = data.get("test")?.toString() || "";
             const note = data.get("note")?.toString() || "";
-            const advertiser = decoded ? decoded.userId: ""
+            const advertiser = decoded ? decoded.userId : ""
             fetchData(manufacturer, name, model, km, hand, test, note, urls, price, advertiser)
         }
         else {
@@ -192,14 +192,39 @@ export const AddCar2 = () => {
                                 name="note"
                                 autoComplete="note"
                             />
-                            <div>
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
-                                <input type="file" onChange={handleFileChange} />
+                            <div id='buttonToUploadImages'>
+                                <Button sx={{margin:"5px", width:"40%"}} variant="outlined" component="label">
+                                    {files[0] ? files[0].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
+                                <Button sx={{margin:"5px", width:"40%"}}  variant="outlined" component="label">
+                                    {files[1] ? files[1].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
+                                <Button sx={{margin:"5px", width:"40%"}}  variant="outlined" component="label">
+                                    {files[2] ? files[2].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
+                                <Button sx={{margin:"5px", width:"40%"}}  variant="outlined" component="label">
+                                    {files[3] ? files[3].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
+                                <Button sx={{margin:"5px", width:"40%"}} variant="outlined" component="label">
+                                    {files[4] ? files[4].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
+                                <Button sx={{margin:"5px", width:"40%"}} variant="outlined" component="label">
+                                    {files[5] ? files[5].name : "העלאת תמונה"}
+                                    <input type="file" style={{ display: 'none' }} onChange={handleFileChange} />
+                                </Button>
                             </div>
+                            {error
+                                ? error && <p>{error}</p>
+                                : waiting && (
+                                    <Box sx={{ width: "100%", marginTop: "20px" }}>
+                                        <LinearProgress />
+                                    </Box>
+                                )}
                             <Button
                                 type="submit"
                                 fullWidth
@@ -210,15 +235,6 @@ export const AddCar2 = () => {
                                 {"שלח"}
                             </Button>
                         </Box>
-                        {error ? (
-                            <p>{error}</p>
-                        ) : (
-                            waiting && (
-                                <Box sx={{ width: "100%" }}>
-                                    <LinearProgress />
-                                </Box>
-                            )
-                        )}
                     </Box>
                 </Container>
             </ThemeProvider>

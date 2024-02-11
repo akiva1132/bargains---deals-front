@@ -17,7 +17,7 @@ export const UserList = () => {
             </div>
             <div id='cards'>
                 {
-                    users ? users.map((user) => <UserCard user={user}/>) :
+                    users ? users.map((user) => <UserCard key={user.id} user={user}/>) :
                         <div className="progress">
                             <CircularIndeterminate />
                         </div>

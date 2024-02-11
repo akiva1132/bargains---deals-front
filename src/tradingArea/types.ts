@@ -13,10 +13,10 @@ export interface Car {
 
 export interface User {
   id:string
-  userName: string
-  firstName: string
+  fullName:string
   lastName: string
   phone: number
   IsAdamin: boolean
   profileImage: string
+  numberAds: number
 }

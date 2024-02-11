@@ -22,13 +22,13 @@ export const UserCard = ({ user }: { user: User }) => {
         </AspectRatio>
       </CardOverflow>
       <CardContent>
-        <Typography level="title-md">{user.firstName + " " + user.lastName}</Typography>
+        <Typography level="title-md">{user.fullName}</Typography>
       </CardContent>
       <CardOverflow variant="soft" sx={{ bgcolor: 'background.level1' }}>
         <Divider inset="context" />
         <CardContent sx={{display:"flex",alignItems: "center"}} orientation="horizontal">
           <Typography level="body-xs" fontWeight="md" textColor="text.secondary">
-            {"30 מודעות"}
+            {`${user.numberAds || 0} מודעות`}
           </Typography>
           <Divider orientation="vertical" />
           <Button onClick={() => navigate(`/tradingArea/lot/${user.id}`)} sx={{fontSize:"13px"}}>{"היכנס למגרש"}</Button>
