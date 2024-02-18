@@ -21,6 +21,7 @@ export const useSignUp = () => {
     phone: string,
     fullName: string,
     profileImage: string,
+    code:string
   ) => {
     try {
       setError("");
@@ -36,7 +37,7 @@ export const useSignUp = () => {
         isAdmin: false
       }
       console.log(data);
-      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/register/`, data, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/register/${code}`, data, {
       });
       console.log(response.data);
       localStorage.setItem("token2", response.data)

@@ -12,6 +12,11 @@ export const signUpSchema = yup.object().shape({
     .required("חובה להכניס שם מלא או שם מגרש")
     .min(1, "שם קצר מידי")
     .max(20, "שם ארוך מידי"),
+    code: yup
+    .string()
+    .required("חובה להכניס קוד הרשמה")
+    .min(6, "קוד קצר מידי")
+    .max(6, "קוד ארוך מידי"),
     phone: yup
     .string()
     .required("חובה להכניס מספר טלפון")

@@ -63,7 +63,7 @@ export const SignUp = () => {
   });
 
   const onSubmit = (user: any) => {
-    const { username, password, fullname, phone } = user;
+    const { username, password, fullname, phone , code} = user;
     setError("")
     setWaiting(true)
     fetchData(
@@ -72,6 +72,7 @@ export const SignUp = () => {
       phone,
       fullname,
       urlFile || "",
+      code
     )
   };
 
@@ -96,6 +97,17 @@ export const SignUp = () => {
           margin="normal"
           error={!!errors.username}
           helperText={errors?.username?.message}
+          InputLabelProps={{
+            style: { textAlign: 'right' }
+          }}
+        />
+                <TextField
+          {...register("code")}
+          label="קוד הרשמה"
+          fullWidth
+          margin="normal"
+          error={!!errors.code}
+          helperText={errors?.code?.message}
           InputLabelProps={{
             style: { textAlign: 'right' }
           }}
