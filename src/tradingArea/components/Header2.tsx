@@ -29,7 +29,7 @@ export const Header2 = () => {
 
     const token = localStorage.getItem("token2")
 
-    const pages: string[] = token?["מודעה חדשה"]:[]
+    const pages: string[] = token?["מודעה חדשה", "קוד ליצירת משתמש חדש"]:[]
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -43,6 +43,11 @@ export const Header2 = () => {
 
     const handleClickAddCar = () => {
         navigate("/tradingArea/AddCar/")
+        setAnchorElNav(null);
+    };
+
+    const handleClickCode = () => {
+        navigate("/tradingArea/GenerateCode/")
         setAnchorElNav(null);
     };
 
@@ -111,7 +116,7 @@ export const Header2 = () => {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleClickAddCar}>
+                                    <MenuItem key={page} onClick={page === 'מודעה חדשה'?handleClickAddCar:handleClickCode}                                    >
                                         <Typography textAlign="center">{page}</Typography>
                                         <FaPlus />
                                     </MenuItem>
@@ -143,7 +148,7 @@ export const Header2 = () => {
                             {pages.map((page, index) => (
                                 <div key={index} className='buttonHader'>
                                     <Button
-                                        onClick={handleClickAddCar}
+                                        onClick={page === 'מודעה חדשה'?handleClickAddCar:handleClickCode}
                                         sx={{ my: 2, color: 'white', display: 'block' }}
                                     >
                                         {page}

@@ -32,7 +32,8 @@ export const useSignUp = () => {
         phone: phone,
         fullName: fullName,
         profileImage: profileImage,
-        numberAds: 0
+        numberAds: 0,
+        isAdmin: false
       }
       console.log(data);
       const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auction/register/`, data, {
