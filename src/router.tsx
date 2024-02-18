@@ -9,7 +9,7 @@ import { UserReferral } from './tradingArea/components/UserReferral';
 import { AddCar2 } from './tradingArea/components/AddCar2';
 import { Lot } from './tradingArea/components/Lot';
 import { SignUp } from './tradingArea/components/SignUp';
-import { GenerateCode } from './tradingArea/components/generateCode';
+import { GenerateCode } from './tradingArea/components/GenerateCode';
 
 export const router = createBrowserRouter([
   {
