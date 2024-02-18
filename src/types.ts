@@ -9,4 +9,5 @@ export interface Car{
         hand: number
         test: string
         price: number
+        advertiser: string
       }

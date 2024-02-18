@@ -10,16 +10,18 @@ import { CircularIndeterminate } from "./CircularIndeterminate";
 import { Button, IconButton } from "@mui/material";
 import { FaShekelSign } from "react-icons/fa";
 import DeleteIcon from '@mui/icons-material/Delete';
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Divider from '@mui/material/Divider';
+import { CiEdit } from "react-icons/ci";
+import { useState } from "react";
+import { DeleteDialog } from "./DeleteDialog";
 
 
 
 
 
 export const CarDetails2 = () => {
-    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
+
     const { id } = useParams();
     const { car } = useFetchDetails(id || "")
     if (!car) {
@@ -29,32 +31,23 @@ export const CarDetails2 = () => {
             </div>
         )
     }
-    const token = localStorage.getItem("token")
-    const handleDelete = () => {
-        const config = {
-            method: 'delete',
-            maxBodyLength: Infinity,
-            url: `${import.meta.env.VITE_BASE_URL}/auction/${car._id}`,
-            headers: {
-                'Authorization': token
-            }
-        };
-        axios.request(config)
-            .then((response) => {
-                navigate("/tradingArea/")
-                console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+
     const phoneNumber = '+972532467781'
     const messageText = `היי, אני פונה בקשר למודעה לגבי ה${car.manufacturer} ${car.name}`
     const whatsappLink = `whatsapp://send?phone=${phoneNumber}&text=${messageText}`;
+    console.log(car.advertiser);
+    const userId = JSON.parse(localStorage.getItem("userDetails") || "").userId
+      
     return (
         <div>
             <div id="Car">
                 <div id="CarDetails">
+                <DeleteDialog open={open} setOpen={setOpen} carId={car._id}/>
                     <div id="details">
                         <Divider />
                         <span style={{ display: 'flex' }}>
@@ -94,9 +87,16 @@ export const CarDetails2 = () => {
                 </div>
             </div>
             <div id="sendMessage">
-                {token && <IconButton sx={{ height: "35px" }} color="secondary" aria-label="delete" onClick={handleDelete}>
-                    <DeleteIcon />
-                </IconButton>}
+                {car.advertiser === userId && <>
+                    <IconButton sx={{ height: "35px" }} color="secondary" aria-label="delete" onClick={handleClickOpen}>
+                        <DeleteIcon />
+                    </IconButton>
+
+                    <IconButton sx={{ height: "35px" }} color="secondary">
+                        <CiEdit />
+                    </IconButton></>
+
+                }
                 <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                     <Button sx={{ marginBottom: "60px" }} variant="contained">קישור ישיר לוואצפ</Button>
                 </a>

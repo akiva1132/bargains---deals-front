@@ -1,4 +1,5 @@
 export interface Car {
+  [x: string]: any
   _id: string
   manufacturer: string
   name: string

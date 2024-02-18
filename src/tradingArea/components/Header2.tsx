@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { Outlet } from 'react-router-dom';
 import { Avatar, Tooltip } from '@mui/material';
 import { FaPlus } from "react-icons/fa6";
+import { jwtDecode } from 'jwt-decode';
+import { useEffect } from 'react';
 
 
 
@@ -28,8 +30,15 @@ export const Header2 = () => {
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
     const token = localStorage.getItem("token2")
+    const decode = token ? jwtDecode(token) as any : null;
 
-    const pages: string[] = token?["מודעה חדשה", "קוד ליצירת משתמש חדש"]:[]
+    useEffect(() => {
+        localStorage.setItem("userDetails", JSON.stringify(decode))
+        console.log(decode);
+    }, [])
+
+    // localStorage.setItem("isAdmin")
+    const pages: string[] = decode?.isAdmin ? ["מודעה חדשה", "קוד ליצירת משתמש חדש"] : token?["מודעה חדשה"]:[]
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -116,7 +125,7 @@ export const Header2 = () => {
                                 }}
                             >
                                 {pages.map((page) => (
-                                    <MenuItem key={page} onClick={page === 'מודעה חדשה'?handleClickAddCar:handleClickCode}                                    >
+                                    <MenuItem key={page} onClick={page === 'מודעה חדשה' ? handleClickAddCar : handleClickCode}                                    >
                                         <Typography textAlign="center">{page}</Typography>
                                         <FaPlus />
                                     </MenuItem>
@@ -148,7 +157,7 @@ export const Header2 = () => {
                             {pages.map((page, index) => (
                                 <div key={index} className='buttonHader'>
                                     <Button
-                                        onClick={page === 'מודעה חדשה'?handleClickAddCar:handleClickCode}
+                                        onClick={page === 'מודעה חדשה' ? handleClickAddCar : handleClickCode}
                                         sx={{ my: 2, color: 'white', display: 'block' }}
                                     >
                                         {page}
