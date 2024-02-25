@@ -91,7 +91,7 @@ export const LogIn2 = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                {"התחברות"}
               </Button>
             </Box>
             {error ? (

@@ -183,7 +183,7 @@ export const SignUp = () => {
           }}
           disabled={!modeButton}
         >
-          Sign up
+        {"הרשמה"}
         </Button>
       </form>
     </Container>
