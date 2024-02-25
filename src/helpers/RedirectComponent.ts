@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 const RedirectComponent = () => {
+    const navigate = useNavigate()
     useEffect(() => {
         // הפנייה לאתר מסוים
         const redirectToSpecificSite = () => {
-            const desiredUrl = "https://bargains-deals-front.onrender.com/tradingArea";
-            window.location.replace(desiredUrl);
+            navigate("/tradingArea/")
         }
         redirectToSpecificSite();
     }, []);
